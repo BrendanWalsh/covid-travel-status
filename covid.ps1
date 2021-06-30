@@ -1,0 +1,1 @@
+ubuntu -c "./covid.sh" @args
