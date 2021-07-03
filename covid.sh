@@ -1,3 +1,5 @@
+#!/bin/bash
+
 get_name () {
 	curl -s https://restcountries.eu/rest/v2/alpha/$1 | jq -r '.name'
 }
@@ -59,8 +61,8 @@ export -f print_country_info
 
 if [[ $1 == "--install" ]]
 then
-	sudo apt install parallel
-	sudo apt install jq
+	apt install parallel
+	apt install jq
 	exit 0
 fi
 
@@ -73,4 +75,4 @@ fi
 
 countryCodes=`curl -s 'https://restcountries.eu/rest/v2/all' | jq -r '.[].alpha2Code'`
 
-echo "$countryCodes" | parallel 'bash -c "print_country_info {}"'
+echo "$countryCodes" | parallel 'bash -c "print_country_info {}"' > country-status.txt
